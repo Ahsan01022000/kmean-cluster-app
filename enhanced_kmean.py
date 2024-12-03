@@ -25,6 +25,35 @@ if uploaded_file is not None:
     st.write("###data summary:")
     st.write(df.describe())
     st.write("Missing values: ",df.isnull().sum())
+        st.sidebar.header("Handle Missing Values")
+
+    # Check if there are missing values
+    if df.isnull().values.any():
+        # Display missing value summary
+        st.write("Dataset has missing values. Choose a method to handle them.")
+
+        # Options for handling missing values
+        missing_value_action = st.sidebar.radio(
+        "Choose how to handle missing values:",
+        ("Drop Rows", "Impute with Mean", "Impute with Median", "Impute with Mode")
+                                                                                  )
+
+    # Handle missing values based on user selection
+    if missing_value_action == "Drop Rows":
+            df = df.dropna()
+            st.write("Dropped rows with missing values.")
+    elif missing_value_action == "Impute with Mean":
+            df = df.fillna(df.mean(numeric_only=True))
+            st.write("Imputed missing numerical values with mean.")
+    elif missing_value_action == "Impute with Median":
+            df = df.fillna(df.median(numeric_only=True))
+            st.write("Imputed missing numerical values with median.")
+    elif missing_value_action == "Impute with Mode":
+            for col in df.columns:
+                df[col].fillna(df[col].mode()[0], inplace=True)
+                st.write("Imputed missing values with mode for each column.")
+    st.write("Updated Dataset:")
+    st.write(df.head())
     
     #Dropping unnecessary columns
     st.sidebar.subheader("Data Preprocessing")
