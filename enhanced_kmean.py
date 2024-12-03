@@ -25,7 +25,8 @@ if uploaded_file is not None:
     st.write("###data summary:")
     st.write(df.describe())
     st.write("Missing values: ",df.isnull().sum())
-        st.sidebar.header("Handle Missing Values")
+    
+    st.sidebar.header("Handle Missing Values")
 
     # Check if there are missing values
     if df.isnull().values.any():
