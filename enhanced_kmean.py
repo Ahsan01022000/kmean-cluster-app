@@ -18,11 +18,11 @@ st.write("Upload Your CSV dataset,Configure Clustering Parameters and Visualise 
 uploaded_file=st.file_uploader("Upload the Csv file",type="csv")
 if uploaded_file is not None:
     df=pd.read_csv(uploaded_file)
-    st.write("###dataset preview: ")
+    st.write("dataset preview: ")
     st.dataframe(df)
    
     #Data Summary
-    st.write("###data summary:")
+    st.write("data summary:")
     st.write(df.describe())
     st.write("Missing values: ",df.isnull().sum())
     
@@ -142,8 +142,7 @@ if uploaded_file is not None:
             mime="text/csv"
         )
 
-# Footer
-st.write("### Created with Streamlit")
+
 
 
 
